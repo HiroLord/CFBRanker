@@ -31,8 +31,8 @@ for game in games:
 	winMult = 1
 	loseMult = 1
 	if (age > 14):
-		winMult = 1.5
-		loseMult = 0.5
+		winMult = 1.2
+		loseMult = 0.8
 	age = float(age)
 	home = game["Home Team"]
 	vis = game["Vis Team"]
@@ -75,24 +75,26 @@ def getOutcome(game):
 	else:
 		return (visTeam, homeTeam)
 
-for i in range(20):
-	sorted_x = sorted(teamScores.items(), key=operator.itemgetter(1), reverse=True)
+sorted_x = sorted(teamScores.items(), key=operator.itemgetter(1), reverse=True)
+numTeams = len(sorted_x)
+
+for i in range(800):
 	sorted_y = [a for (a, _) in sorted_x]
 
 	for game in games:
 		age = float(game["Age"])
-		if age > 15:
-			age = 15
-		age /= 15.0
+		if age > 14:
+			age = 16
+		age /= 14.0
 		result = getOutcome(game)
 		loserScore = [item for item in sorted_x if item[0] == result[1]]
 		place = sorted_y.index(result[1])
-		teamScores[result[0]] += (128 - place) * 20 * age
+		teamScores[result[0]] += (numTeams - place) * 20 * age
 		place1 = sorted_y.index(result[0])
-		teamScores[result[1]] -= place1 * 10 * age
+		teamScores[result[1]] -= place1 * 15 * age
+	sorted_x = sorted(teamScores.items(), key=operator.itemgetter(1), reverse=True)
 
-sorted_x = sorted(teamScores.items(), key=operator.itemgetter(1), reverse=True)
-
-for tup in range(25):
+for tup in range(30):
 	string = "{}: {} {:.0f}".format(tup+1, sorted_x[tup][0], sorted_x[tup][1])
 	print(string)
+#input()
