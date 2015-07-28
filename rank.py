@@ -48,11 +48,11 @@ for game in games:
 	homeTotal += diff*2 * age;
 	visTotal -= diff*2 * age;
 	if diff > 0:
-		homeTotal += 100 * age * winMult
-		visTotal -= 50 * age * loseMult
+		homeTotal += 200 * age * winMult
+		visTotal -= 150 * age * loseMult
 	else:
-		homeTotal -= 60 * age * winMult
-		visTotal += 110 * age * loseMult
+		homeTotal -= 160 * age * winMult
+		visTotal += 210 * age * loseMult
 	
 	if homeTeam in teamScores:
 		teamScores[homeTeam] += homeTotal
