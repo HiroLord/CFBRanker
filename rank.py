@@ -1,4 +1,5 @@
 import operator
+import math
 from datetime import date
 
 f = open('wagstatscfb2014.csv', 'r')
@@ -70,15 +71,16 @@ def getOutcome(game):
 	visTeam = vis["Team"]
 	homeScore = int(home["Score"])
 	visScore = int(vis["Score"])
-	if (homeScore > visScore):
-		return (homeTeam, visTeam)
+	diff = homeScore - visScore
+	if diff > 0:
+		return (homeTeam, visTeam, diff)
 	else:
-		return (visTeam, homeTeam)
+		return (visTeam, homeTeam, -diff)
 
 sorted_x = sorted(teamScores.items(), key=operator.itemgetter(1), reverse=True)
-numTeams = len(sorted_x)
+numTeams = len(sorted_x) + 1
 
-for i in range(800):
+for i in range(100):
 	sorted_y = [a for (a, _) in sorted_x]
 
 	for game in games:
@@ -87,14 +89,13 @@ for i in range(800):
 			age = 16
 		age /= 14.0
 		result = getOutcome(game)
-		loserScore = [item for item in sorted_x if item[0] == result[1]]
-		place = sorted_y.index(result[1])
-		teamScores[result[0]] += (numTeams - place) * 20 * age
-		place1 = sorted_y.index(result[0])
-		teamScores[result[1]] -= place1 * 15 * age
+		place = sorted_y.index(result[1]) + 1
+		teamScores[result[0]] += ((numTeams - place) ** 3) * age
+		place1 = sorted_y.index(result[0]) + 1
+		teamScores[result[1]] -= (place1 ** 2) * age
 	sorted_x = sorted(teamScores.items(), key=operator.itemgetter(1), reverse=True)
 
 for tup in range(30):
-	string = "{}: {} {:.0f}".format(tup+1, sorted_x[tup][0], sorted_x[tup][1])
+	string = "{}: {}".format(tup+1, sorted_x[tup][0])
 	print(string)
 #input()
