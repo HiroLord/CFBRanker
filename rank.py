@@ -48,13 +48,13 @@ while len(line) > 0:
 	day = line[0].strip()
 	
         #Whats the point of age, playoffs? 
-        dateA = [int(x) for x in day.split("-")]
+	dateA = [int(x) for x in day.split("-")]
 	numDate = date(dateA[0], dateA[1], dateA[2])
 	diff = (numDate-start).days
 	age = (diff//7) + 1
 	
         
-        game = {"Date": date, "Age": age, "Vis Team": {"Team": line[1].strip()}, "Home Team": {"Team": line[18].strip()}}
+	game = {"Date": date, "Age": age, "Vis Team": {"Team": line[1].strip()}, "Home Team": {"Team": line[18].strip()}}
 	for i in range(len(headers)):
 		game["Vis Team"][headers[i]] = line[i+2].strip()
 	#for j in range(len(headers))
