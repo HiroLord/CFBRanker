@@ -1,19 +1,17 @@
 from datetime import date
 
-def getOutcome(game):
-	home = game["Home Team"]
-	vis = game["Vis Team"]
-	homeTeam = home["Team"]
-	visTeam = vis["Team"]
-	homeScore = int(home["Score"])
-	visScore = int(vis["Score"])
-	diff = homeScore - visScore
-	if diff > 0:
-		return (homeTeam, visTeam, diff)
-	else:
-		return (visTeam, homeTeam, -diff)
-
 def ParseInput(file, statsPerTeam):
+    '''
+      Parse a specially formatted input file
+      
+        This parses a specially formatted file, and generates data relevant
+      to a ranking system, returning a list conataining all the games data
+      for the season.
+
+        The point in the season, denoted by age, is a factor in determining
+      the ranking, with games later in the season counting more.
+    ''' 
+
     start = date(2014, 8, 26) 
   
     games = []
@@ -39,3 +37,23 @@ def ParseInput(file, statsPerTeam):
     file.close()
 
     return games
+
+def getOutcome(game):
+        '''
+          returns the outcome of the game, reflected in a list containing the
+          winning team, the losing team, and the score differential.
+        '''
+
+	home = game["Home Team"]
+	vis = game["Vis Team"]
+	homeTeam = home["Team"]
+	visTeam = vis["Team"]
+	homeScore = int(home["Score"])
+	visScore = int(vis["Score"])
+	diff = homeScore - visScore
+	if diff > 0:
+		return (homeTeam, visTeam, diff)
+	else:
+		return (visTeam, homeTeam, -diff)
+
+

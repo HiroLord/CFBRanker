@@ -1,12 +1,10 @@
 import operator
 import math
-from datetime import date
 from rankModule import getOutcome, ParseInput
 
 #********************
 # Constants
 #********************
-start = date(2014, 8, 26)
 weeks = 14.0
 statsPerTeam = 16
 numRankings = 30
@@ -27,7 +25,7 @@ for game in games:
 	age = game["Age"]
 	winMult = 1
 	loseMult = 1
-	if (age > 14):
+	if (age > weeks): #used to be 14
 		winMult = 1.2
 		loseMult = 0.8
 	age = float(age)
@@ -70,9 +68,9 @@ for i in range(numIterations):
 
 	for game in games:
 		age = float(game["Age"])
-		if age > 14:
-			age = 16
-		age /= 14.0
+		if age > weeks: #used to be 14
+			age = weeks + 2
+		age /= float(weeks)
 		result = getOutcome(game)
 		place = sorted_y.index(result[1]) + 1
 		teamScores[result[0]] += ((numTeams - place) ** 3) * age
