@@ -1,0 +1,30 @@
+1: OSU
+2: Oregon
+3: FSU
+4: Alabama
+5: Georgia Tech
+6: Wisconsin
+7: Missouri
+8: Marshall
+9: Boise State
+10: Arizona State
+11: Michigan State
+12: UCLA
+13: Georgia
+14: Arizona
+15: TCU
+16: Clemson
+17: USC
+18: Utah
+19: W Kentucky
+20: LA Tech
+21: VT
+22: Ole Miss
+23: Baylor
+24: Arkansas
+25: Stanford
+26: Louisville
+27: Notre Dame
+28: UNC
+29: Air Force
+30: Auburn
